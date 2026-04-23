@@ -145,6 +145,150 @@
     });
   }
 
+  // ---------- Contact modal (Formspree) ----------
+  const contactButtons = document.querySelectorAll('[data-contact]');
+  if (contactButtons.length) {
+    const FORMSPREE_URL = 'https://formspree.io/f/mvzddqdy';
+
+    const modal = document.createElement('div');
+    modal.className = 'contact-modal';
+    modal.setAttribute('role', 'dialog');
+    modal.setAttribute('aria-label', 'Write me a letter');
+    modal.setAttribute('aria-hidden', 'true');
+    modal.innerHTML = `
+      <button class="contact-close" type="button" aria-label="Close">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        </svg>
+      </button>
+      <form class="contact-card" novalidate>
+        <p class="contact-eyebrow" data-contact-context>To Kristin</p>
+        <h3 class="contact-title">Write me a letter.</h3>
+        <p class="contact-sub">She answers personally.</p>
+
+        <div class="contact-fields">
+          <label class="contact-field">
+            <span class="contact-field-label">Name</span>
+            <input type="text" name="name" required autocomplete="name" />
+          </label>
+          <label class="contact-field">
+            <span class="contact-field-label">Your email</span>
+            <input type="email" name="email" required autocomplete="email" />
+          </label>
+          <label class="contact-field contact-field--msg">
+            <span class="contact-field-label">Message</span>
+            <textarea name="message" rows="4" required></textarea>
+          </label>
+        </div>
+
+        <input type="hidden" name="subject" data-contact-subject />
+        <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off" />
+
+        <div class="contact-actions">
+          <button class="contact-submit ghost-btn" type="submit">
+            <span class="contact-submit-text">send letter &rarr;</span>
+          </button>
+          <p class="contact-status" data-contact-status></p>
+        </div>
+      </form>
+    `;
+    document.body.appendChild(modal);
+
+    const form         = modal.querySelector('form');
+    const closeBtn     = modal.querySelector('.contact-close');
+    const subjectField = modal.querySelector('[data-contact-subject]');
+    const contextLabel = modal.querySelector('[data-contact-context]');
+    const submitBtn    = modal.querySelector('.contact-submit');
+    const submitText   = modal.querySelector('.contact-submit-text');
+    const statusEl     = modal.querySelector('[data-contact-status]');
+
+    let lastFocus = null;
+
+    const setState = (state, message) => {
+      form.setAttribute('data-state', state || 'idle');
+      if (state === 'sending') {
+        submitText.textContent = 'sending…';
+        submitBtn.disabled = true;
+        statusEl.textContent = '';
+      } else if (state === 'sent') {
+        submitText.textContent = '✓ sent';
+        submitBtn.disabled = true;
+        statusEl.textContent = 'She will reply soon. Closing this shortly.';
+      } else if (state === 'error') {
+        submitText.textContent = 'try again';
+        submitBtn.disabled = false;
+        statusEl.textContent = message || 'Something went wrong. Try again in a moment.';
+      } else {
+        submitText.innerHTML = 'send letter &rarr;';
+        submitBtn.disabled = false;
+        statusEl.textContent = '';
+      }
+    };
+
+    const open = (subject) => {
+      lastFocus = document.activeElement;
+      subjectField.value = subject || 'General enquiry';
+      contextLabel.textContent = subject || 'To Kristin';
+      setState('idle');
+      form.reset();
+      subjectField.value = subject || 'General enquiry';
+      modal.classList.add('is-open');
+      modal.setAttribute('aria-hidden', 'false');
+      document.body.style.overflow = 'hidden';
+      setTimeout(() => form.querySelector('input[name="name"]').focus(), 120);
+    };
+
+    const close = () => {
+      modal.classList.remove('is-open');
+      modal.setAttribute('aria-hidden', 'true');
+      document.body.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') lastFocus.focus();
+    };
+
+    // Event delegation so dynamically-rendered [data-contact] buttons
+    // (e.g. inside the live-card HTML produced by renderFeatured/renderEmpty)
+    // are also covered without re-binding per render.
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-contact]');
+      if (!btn) return;
+      e.preventDefault();
+      open(btn.getAttribute('data-contact') || 'General enquiry');
+    });
+
+    closeBtn.addEventListener('click', close);
+    modal.addEventListener('click', (e) => { if (e.target === modal) close(); });
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
+    });
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const state = form.getAttribute('data-state');
+      if (state === 'sending' || state === 'sent') return;
+      setState('sending');
+      try {
+        const res = await fetch(FORMSPREE_URL, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+        if (res.ok) {
+          setState('sent');
+          setTimeout(close, 3200);
+        } else {
+          let msg = 'Something went wrong.';
+          try {
+            const data = await res.json();
+            if (data?.errors?.[0]?.message) msg = data.errors[0].message;
+          } catch {}
+          setState('error', msg);
+        }
+      } catch {
+        setState('error', 'Network error. Please try again.');
+      }
+    });
+  }
+
   // ---------- Mailto copy-to-clipboard ----------
   // Default behavior for mailto: on many Windows systems without a configured
   // mail client pops an OS-level "choose app" dialog listing browsers, which
@@ -235,8 +379,8 @@
       ${subtitle}
       ${cta}
       <p class="live-booking">
-        Booking, press &amp; collaborations &mdash;
-        <a href="mailto:booking@kristinkalnapenk.com">booking@kristinkalnapenk.com</a>
+        Booking, press &amp; collaborations
+        <button class="live-booking-btn" type="button" data-contact="Booking enquiry">Write a letter &rarr;</button>
       </p>
     `;
   };
@@ -249,8 +393,8 @@
       <p class="live-empty">No upcoming shows announced.</p>
       <a class="ghost-btn" href="#follow">join the list</a>
       <p class="live-booking">
-        Booking, press &amp; collaborations &mdash;
-        <a href="mailto:booking@kristinkalnapenk.com">booking@kristinkalnapenk.com</a>
+        Booking, press &amp; collaborations
+        <button class="live-booking-btn" type="button" data-contact="Booking enquiry">Write a letter &rarr;</button>
       </p>
     `;
   };
