@@ -1174,10 +1174,10 @@ a { color: inherit; text-decoration: none; }
 .signup--pending button .btn-default { font-style: italic; text-transform: none; letter-spacing: 0.18em; }
 
 .signup-note {
-  margin: -36px auto 48px;
+  margin: -30px auto 48px;
   max-width: 560px;
   font-family: var(--serif);
-  font-size: 14px;
+  font-size: 17px;
   font-style: italic;
   color: var(--mute);
   line-height: 1.6;
@@ -1509,10 +1509,11 @@ a { color: inherit; text-decoration: none; }
   display: block;
   font-family: var(--serif);
   font-style: italic;
-  font-size: 12px;
+  font-size: 15px;
+  line-height: 1.4;
   letter-spacing: 0.01em;
   color: #c96a5f;
-  margin-top: 6px;
+  margin-top: 8px;
   min-height: 1em;
   opacity: 0;
   transform: translateY(-2px);
