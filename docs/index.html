@@ -1,0 +1,429 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<title>Kristin Kalnapenk — singer, songwriter, composer</title>
+<meta name="description" content="Kristin Kalnapenk (01.11.1995, Tallinn) — singer, songwriter, and composer. Jazz-rooted, writing in Estonian, English, and Spanish." />
+<meta name="theme-color" content="#0a0908" />
+
+<meta property="og:title" content="Kristin Kalnapenk" />
+<meta property="og:description" content="Singer, songwriter, and composer — jazz-rooted, writing in three languages." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://kristinkalnapenk.com/" />
+<meta property="og:image" content="https://kristinkalnapenk.com/assets/img/portrait-02.jpg" />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="Kristin Kalnapenk" />
+<meta name="twitter:description" content="Singer, songwriter, and composer — jazz-rooted, writing in three languages." />
+<meta name="twitter:image" content="https://kristinkalnapenk.com/assets/img/portrait-02.jpg" />
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" />
+
+<link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+<header class="nav" data-nav>
+  <a class="nav-link" href="#music"><span>music</span></a>
+  <a class="nav-link" href="#video"><span>video</span></a>
+  <a class="nav-logo" href="#top" aria-label="Kristin Kalnapenk home">
+    <span class="nav-logo-text">K.&nbsp;K.</span>
+  </a>
+  <a class="nav-link" href="#live"><span>live</span></a>
+  <a class="nav-link" href="#follow"><span>follow</span></a>
+  <button class="nav-burger" type="button" aria-label="Open menu" data-burger>
+    <span></span><span></span><span></span>
+  </button>
+</header>
+
+<nav class="drawer" data-drawer aria-hidden="true">
+  <a href="#music">music</a>
+  <a href="#about">about</a>
+  <a href="#live">live</a>
+  <a href="#video">video</a>
+  <a href="#follow">follow</a>
+</nav>
+
+<main id="top">
+
+  <!-- HERO ============================================================== -->
+  <section class="hero" aria-label="Introduction">
+    <div class="hero-grid">
+      <figure class="hero-fig hero-fig--left reveal">
+        <img src="assets/img/portrait-01.jpg" alt="Kristin Kalnapenk portrait by Evelyn Mikomägi" />
+      </figure>
+
+      <div class="hero-title">
+        <p class="hero-eyebrow">Estonian singer &middot; songwriter</p>
+        <h1 class="wordmark">
+          <span class="wordmark-line">Kristin</span>
+          <span class="wordmark-line wordmark-line--italic">Kalnapenk</span>
+        </h1>
+        <p class="hero-sub">new music &mdash; out soon</p>
+      </div>
+
+      <figure class="hero-fig hero-fig--right reveal">
+        <img src="assets/img/portrait-02.jpg" alt="Kristin Kalnapenk portrait by Evelyn Mikomägi" />
+      </figure>
+    </div>
+
+    <div class="hero-credit">
+      <span></span>
+      <span class="hero-scroll">scroll <i></i></span>
+    </div>
+  </section>
+
+
+  <!-- LIVE / TOUR ======================================================= -->
+  <section id="live" class="live">
+    <div class="live-portraits">
+      <figure class="live-fig reveal"><img src="assets/img/portrait-04.jpg" alt="Kristin Kalnapenk" /></figure>
+      <figure class="live-fig live-fig--alt reveal"><img src="assets/img/portrait-01.jpg" alt="Kristin Kalnapenk" /></figure>
+    </div>
+
+    <div class="live-card live-card--show reveal">
+      <p class="section-eyebrow">live &mdash; next</p>
+
+      <div class="live-show-date">
+        <span class="live-show-day">24.04</span>
+        <span class="live-show-time">19:30 &mdash; 23:30</span>
+      </div>
+
+      <h3 class="live-show-title">HeartBeat</h3>
+      <p class="live-show-sub">
+        Ekstaatiline tants &amp; kontsert<br/>
+        with <span class="italic">DJ&nbsp;Layqa</span> &amp;
+        the Kristin Kalnapenk b&auml;nd
+      </p>
+
+      <a class="ghost-btn" href="https://fienta.com/et/heartbeat-ecstatic-dance-24-04-kristin-kalnapenk-dj-layqa" target="_blank" rel="noopener">Tickets &rarr;</a>
+
+      <p class="live-booking">
+        Booking, press &amp; collaborations &mdash;
+        <a href="mailto:booking@kristinkalnapenk.com">booking@kristinkalnapenk.com</a>
+      </p>
+    </div>
+
+    <!-- upcoming shows list (populated from shows.json) -->
+    <div class="live-upcoming reveal" data-upcoming hidden>
+      <p class="section-eyebrow">upcoming</p>
+      <ul class="upcoming-list" data-upcoming-list></ul>
+      <button class="ghost-btn upcoming-more" type="button" data-upcoming-more hidden>
+        Show all <span data-upcoming-count></span> &rarr;
+      </button>
+    </div>
+
+    <!-- archived / featured past show -->
+    <div class="live-archive reveal">
+      <p class="section-eyebrow">recently</p>
+      <div class="archive-row">
+        <div class="archive-date">
+          <span class="archive-day">14.12</span>
+          <span class="archive-year">2025</span>
+        </div>
+        <div class="archive-meta">
+          <p class="archive-title">Aitäh, EMTA! &mdash; Philly Joe&rsquo;s</p>
+          <p class="archive-city">Tallinn, Estonia &middot; 20:00</p>
+        </div>
+        <span class="archive-tag">past</span>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MUSIC ============================================================= -->
+  <section id="music" class="music">
+    <div class="music-inner">
+      <div class="music-art reveal">
+        <div class="music-art-frame">
+          <img src="assets/img/promo-02.jpg" alt="Aitäh, EMTA — Kristin Kalnapenk" />
+        </div>
+        <p class="caption">the latest</p>
+      </div>
+
+      <div class="music-body reveal">
+        <p class="section-eyebrow">single</p>
+        <h2 class="section-title">
+          <span class="italic">Südames</span>
+        </h2>
+        <p class="section-lede">
+          A song that lives in the chest &mdash; <em>s&uuml;dames</em>,
+          inside the heart. Quiet at the edges, brave in the middle.
+          Listen with the lights low.
+        </p>
+
+        <ul class="listen">
+          <li><a href="https://open.spotify.com/track/5NDWgcUhgAX9uYPJ8FtNh1" target="_blank" rel="noopener">Listen on Spotify <i>&rarr;</i></a></li>
+          <li><a href="https://www.youtube.com/watch?v=LYaLJs8wOnU" target="_blank" rel="noopener">Listen on YouTube <i>&rarr;</i></a></li>
+          <li><a href="https://open.spotify.com/artist/6NMPySy7Cv7jO81V4QfWyE" target="_blank" rel="noopener">All songs on Spotify <i>&rarr;</i></a></li>
+          <li><a href="https://linktr.ee/kristinkalnapenk" target="_blank" rel="noopener">All links <i>&rarr;</i></a></li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- TRACK FEATURE / ABOUT ============================================ -->
+  <section id="about" class="feature">
+    <div class="feature-bg" aria-hidden="true">
+      <img src="assets/img/portrait-03.jpg" alt="" />
+    </div>
+
+    <div class="feature-inner reveal">
+      <p class="section-eyebrow">about</p>
+      <h2 class="section-title serif-display">
+        A voice between <span class="italic">Estonia</span> <br/>
+        and <span class="italic">Spain</span>.
+      </h2>
+      <p class="feature-body">
+        Kristin Kalnapenk is a Tallinn-based singer, songwriter, and
+        composer, rooted in jazz with lyrics in Estonian, English, and
+        Spanish. She spent twelve years in Spain from the age of ten,
+        and most recently studied in the United States &mdash;
+        returning home to finish her master&rsquo;s at the Estonian
+        Academy of Music and Theatre.
+      </p>
+      <p class="feature-body">
+        A voice that treats every lyric as something worth
+        waiting for. Alongside it, aerial acrobatics and dance
+        weave through her performances &mdash; music as one
+        expression among many.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- VIDEO =========================================================== -->
+  <section id="video" class="video">
+    <div class="section-head">
+      <p class="section-eyebrow">watch</p>
+      <h2 class="section-title serif-display">on&nbsp;film</h2>
+    </div>
+
+    <div class="video-grid video-grid--two">
+      <a class="video-card reveal" href="https://www.youtube.com/watch?v=BarMznibK-Q" target="_blank" rel="noopener">
+        <img src="https://img.youtube.com/vi/BarMznibK-Q/maxresdefault.jpg"
+             onerror="this.onerror=null;this.src='https://img.youtube.com/vi/BarMznibK-Q/hqdefault.jpg';"
+             alt="Kristin Kalnapenk — Find A Way (Eesti Laul)" />
+        <span class="video-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </span>
+        <figcaption>
+          <span class="v-kind">Eesti&nbsp;Laul &middot; music video</span>
+          <span class="v-title">Find&nbsp;A&nbsp;Way</span>
+          <span class="v-watch">watch on youtube <i>&rarr;</i></span>
+        </figcaption>
+      </a>
+
+      <a class="video-card reveal" href="https://www.youtube.com/watch?v=-2Aa5CgEVYE" target="_blank" rel="noopener">
+        <img src="assets/img/gallery-moody-01.jpg" alt="Kristin Kalnapenk — live at EMTA 2020" />
+        <span class="video-play" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="22" height="22"><path d="M8 5v14l11-7z" fill="currentColor"/></svg>
+        </span>
+        <figcaption>
+          <span class="v-kind">live &middot; 15 minutes</span>
+          <span class="v-title">EMTA&nbsp;2020</span>
+          <span class="v-watch">watch on youtube <i>&rarr;</i></span>
+        </figcaption>
+      </a>
+    </div>
+  </section>
+
+
+  <!-- PORTRAITS ========================================================= -->
+  <section id="portraits" class="portraits">
+    <div class="section-head">
+      <p class="section-eyebrow">portraits</p>
+      <h2 class="section-title serif-display">the&nbsp;book</h2>
+    </div>
+
+    <div class="portraits-grid">
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-moody-01.jpg" alt="Kristin Kalnapenk — backstage portrait" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-bold-02.jpg" alt="Kristin Kalnapenk — fashion editorial" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-warm-01.webp" alt="Kristin Kalnapenk — editorial portrait" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-editorial-01.jpg" alt="Kristin Kalnapenk — editorial portrait" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-dream-01.webp" alt="Kristin Kalnapenk — editorial portrait" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-bold-01.jpg"  alt="Kristin Kalnapenk — fashion editorial" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-winter-01.webp" alt="Kristin Kalnapenk — winter editorial" loading="lazy" /></figure>
+      <figure class="portrait-card reveal"><img src="assets/img/gallery-live-02.jpg"  alt="Kristin Kalnapenk — live performance" loading="lazy" /></figure>
+    </div>
+  </section>
+
+
+  <!-- BIOGRAPHY ========================================================= -->
+  <section id="biography" class="bio">
+    <div class="section-head">
+      <p class="section-eyebrow">biography</p>
+      <h2 class="section-title serif-display">A fuller picture.</h2>
+    </div>
+
+    <div class="bio-inner reveal">
+      <p class="bio-body">
+        One day when she was eleven, a verse drifted through her
+        head and she realised it was her own. Songs started
+        coming &mdash; and have kept coming, on guitar, on piano,
+        and often just in the quiet of her mind. Most of them
+        are first caught in ink on the page of a notebook; at
+        concerts you&rsquo;ll hear that same ink sung live over a
+        jazz band&rsquo;s improvisations.
+      </p>
+
+      <p class="bio-body">
+        From the fourth grade she lived twelve years in Spain.
+        She writes lyrics in three languages &mdash; Estonian,
+        English, Spanish &mdash; and sings in each of them on
+        stage. She has been performing for close to fifteen
+        years, most often in intimate rooms: weddings,
+        birthdays, ceremonies, and listening-room sets where
+        the lights stay low and the music asks for patience.
+      </p>
+
+      <p class="bio-body">
+        She earned her bachelor&rsquo;s at the Estonian Academy
+        of Music and Theatre and is completing her master&rsquo;s
+        there in jazz voice, composition, and pedagogy. Through
+        EAMT&rsquo;s Erasmus programme she spent time at Capital
+        University in Columbus, Ohio, where local jazz
+        musicians and audiences welcomed her warmly.
+      </p>
+
+      <div class="bio-strip">
+        <p class="bio-strip-label">Teachers</p>
+        <p class="bio-strip-list">
+          Janet Taylor Jackson-Lummer <span class="bio-dot">&middot;</span>
+          Kadri Voorand <span class="bio-dot">&middot;</span>
+          Anne-Liis Poll <span class="bio-dot">&middot;</span>
+          Susan Musselman
+        </p>
+      </div>
+
+      <div class="bio-strip">
+        <p class="bio-strip-label">Voices she carries</p>
+        <p class="bio-strip-list">
+          Betty Carter <span class="bio-dot">&middot;</span>
+          Ella Fitzgerald <span class="bio-dot">&middot;</span>
+          Nancy Wilson <span class="bio-dot">&middot;</span>
+          Nina Simone <span class="bio-dot">&middot;</span>
+          Whitney Houston <span class="bio-dot">&middot;</span>
+          D&rsquo;Angelo <span class="bio-dot">&middot;</span>
+          Jacob Collier <span class="bio-dot">&middot;</span>
+          Prince <span class="bio-dot">&middot;</span>
+          Miles Davis <span class="bio-dot">&middot;</span>
+          Erykah Badu <span class="bio-dot">&middot;</span>
+          Ariana Grande <span class="bio-dot">&middot;</span>
+          Justin Timberlake <span class="bio-dot">&middot;</span>
+          Hiatus Kaiyote <span class="bio-dot">&middot;</span>
+          Nils Frahm
+        </p>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- MARQUEE =========================================================== -->
+  <section class="marquee" aria-hidden="true">
+    <div class="marquee-track">
+      <span>Kristin Kalnapenk</span><span class="dot">&middot;</span>
+      <span><em>new music soon</em></span><span class="dot">&middot;</span>
+      <span>Kristin Kalnapenk</span><span class="dot">&middot;</span>
+      <span><em>Tallinn &mdash; EE</em></span><span class="dot">&middot;</span>
+      <span>Kristin Kalnapenk</span><span class="dot">&middot;</span>
+      <span><em>new music soon</em></span><span class="dot">&middot;</span>
+      <span>Kristin Kalnapenk</span><span class="dot">&middot;</span>
+      <span><em>Tallinn &mdash; EE</em></span><span class="dot">&middot;</span>
+    </div>
+  </section>
+
+
+  <!-- NEWSLETTER / FOLLOW =============================================== -->
+  <section id="follow" class="follow">
+    <div class="follow-inner reveal">
+      <p class="section-eyebrow">stay close</p>
+      <h2 class="section-title serif-display">
+        For <span class="italic">first listens</span>, <br/>
+        upcoming shows, and letters from the studio.
+      </h2>
+
+      <form class="signup" onsubmit="event.preventDefault(); this.classList.add('sent');">
+        <label>
+          <span class="visually-hidden">Email</span>
+          <input type="email" required placeholder="your email" autocomplete="email" />
+        </label>
+        <button type="submit">
+          <span class="btn-default">subscribe</span>
+          <span class="btn-sent">thank you &mdash; see you soon</span>
+        </button>
+      </form>
+
+      <ul class="socials">
+        <li><a href="https://www.instagram.com/kristinkalnapenk" target="_blank" rel="noopener">Instagram</a></li>
+        <li><a href="https://open.spotify.com/artist/6NMPySy7Cv7jO81V4QfWyE" target="_blank" rel="noopener">Spotify</a></li>
+        <li><a href="https://www.youtube.com/@KRISTINKALNAPENK" target="_blank" rel="noopener">YouTube</a></li>
+        <li><a href="https://www.facebook.com/kristinkalnapenkmusic" target="_blank" rel="noopener">Facebook</a></li>
+        <li><a href="https://linktr.ee/kristinkalnapenk" target="_blank" rel="noopener">All links</a></li>
+      </ul>
+
+      <p class="tip">
+        Enjoying the music? Buy a coffee or leave a tip
+        <span class="tip-links">
+          <a href="https://ko-fi.com/kristincreates" target="_blank" rel="noopener">Ko&#8209;fi</a>
+          <span class="tip-dot">&middot;</span>
+          <a href="https://www.paypal.com/paypalme/kristinkalnapenk" target="_blank" rel="noopener">PayPal</a>
+        </span>
+      </p>
+    </div>
+  </section>
+
+</main>
+
+
+<footer class="foot">
+  <div class="foot-row">
+    <span>&copy; <span data-year>2026</span> Kristin Kalnapenk</span>
+    <span class="foot-dot">&middot;</span>
+    <span>All rights reserved</span>
+    <span class="foot-dot">&middot;</span>
+    <a href="mailto:booking@kristinkalnapenk.com">Booking &amp; press</a>
+    <span class="foot-dot">&middot;</span>
+    <a href="studio/">Studio</a>
+  </div>
+</footer>
+
+
+<!-- lightbox for portraits gallery -->
+<div class="lightbox" data-lightbox aria-hidden="true" role="dialog" aria-label="Portrait viewer">
+  <button class="lightbox-close" type="button" aria-label="Close" data-lightbox-close>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path d="M5 5l14 14M19 5L5 19" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+    </svg>
+  </button>
+  <button class="lightbox-nav lightbox-prev" type="button" aria-label="Previous" data-lightbox-prev>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path d="M15 4L7 12l8 8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <button class="lightbox-nav lightbox-next" type="button" aria-label="Next" data-lightbox-next>
+    <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+      <path d="M9 4l8 8-8 8" stroke="currentColor" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </button>
+  <figure class="lightbox-figure">
+    <img data-lightbox-img alt="" />
+    <figcaption data-lightbox-counter></figcaption>
+  </figure>
+</div>
+
+
+<!-- floating player / contact bubble, à la HER -->
+<button class="fab" type="button" aria-label="Quick listen" data-fab>
+  <svg viewBox="0 0 24 24" width="16" height="16" aria-hidden="true">
+    <path d="M8 5v14l11-7z" fill="currentColor"/>
+  </svg>
+</button>
+
+<script src="script.js"></script>
+</body>
+</html>

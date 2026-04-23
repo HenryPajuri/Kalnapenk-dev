@@ -1,0 +1,17 @@
+# raw source material / scratch — never commit to the site repo
+/kalanepnk3/
+/kalnapenk2/
+/kristinkalnapenk/
+WhatsApp Image *.jpeg
+WhatsApp Image *.jpg
+Screenshot *.png
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# node (if we ever add dependencies)
+node_modules/
+npm-debug.log*

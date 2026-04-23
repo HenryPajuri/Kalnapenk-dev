@@ -1,0 +1,44 @@
+name: Sync shows from Fienta
+
+on:
+  schedule:
+    - cron: "0 * * * *"       # every hour
+  workflow_dispatch:            # manual trigger button in Actions tab
+  push:
+    paths:
+      - "scripts/sync-shows.mjs"
+      - ".github/workflows/sync-shows.yml"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: sync-shows
+  cancel-in-progress: true
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - name: Fetch Fienta events and update shows.json
+        env:
+          FIENTA_ORGANIZER_ID: ${{ vars.FIENTA_ORGANIZER_ID || '39749' }}
+        run: node scripts/sync-shows.mjs
+
+      - name: Commit and push if changed
+        run: |
+          if [[ -n "$(git status --porcelain docs/shows.json)" ]]; then
+            git config user.name  "github-actions[bot]"
+            git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+            git add docs/shows.json
+            git commit -m "sync: update shows.json from Fienta"
+            git push
+          else
+            echo "No changes to shows.json"
+          fi
