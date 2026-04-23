@@ -347,16 +347,18 @@
         upcoming shows, and letters from the studio.
       </h2>
 
-      <form class="signup" onsubmit="event.preventDefault(); this.classList.add('sent');">
+      <form class="signup signup--pending" onsubmit="event.preventDefault();" aria-disabled="true">
         <label>
           <span class="visually-hidden">Email</span>
-          <input type="email" required placeholder="your email" autocomplete="email" />
+          <input type="email" placeholder="coming soon" autocomplete="email" disabled />
         </label>
-        <button type="submit">
-          <span class="btn-default">subscribe</span>
-          <span class="btn-sent">thank you &mdash; see you soon</span>
+        <button type="submit" disabled>
+          <span class="btn-default">soon</span>
         </button>
       </form>
+      <p class="signup-note">
+        Subscriptions open in a few days. <span class="italic">In the meantime, follow along on <a href="https://www.instagram.com/kristinkalnapenk" target="_blank" rel="noopener">Instagram</a>.</span>
+      </p>
 
       <ul class="socials">
         <li><a href="https://www.instagram.com/kristinkalnapenk" target="_blank" rel="noopener">Instagram</a></li>

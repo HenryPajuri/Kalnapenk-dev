@@ -145,6 +145,43 @@
     });
   }
 
+  // ---------- Mailto copy-to-clipboard ----------
+  // Default behavior for mailto: on many Windows systems without a configured
+  // mail client pops an OS-level "choose app" dialog listing browsers, which
+  // almost never does what the user wanted. Clicking copies the email to the
+  // clipboard with a toast instead. Right-click / middle-click still follows
+  // the mailto: link for anyone who genuinely wants it.
+  const mailtoLinks = document.querySelectorAll('a[href^="mailto:"]');
+  if (mailtoLinks.length && navigator.clipboard && window.isSecureContext) {
+    const toast = document.createElement('div');
+    toast.className = 'toast';
+    toast.setAttribute('role', 'status');
+    toast.setAttribute('aria-live', 'polite');
+    document.body.appendChild(toast);
+
+    let toastTimeout;
+    const showToast = (msg) => {
+      toast.textContent = msg;
+      toast.classList.add('is-visible');
+      clearTimeout(toastTimeout);
+      toastTimeout = setTimeout(() => toast.classList.remove('is-visible'), 2400);
+    };
+
+    mailtoLinks.forEach(link => {
+      link.addEventListener('click', async (e) => {
+        if (e.metaKey || e.ctrlKey || e.shiftKey || e.button === 1) return;
+        const email = link.href.replace(/^mailto:/, '').split('?')[0];
+        try {
+          await navigator.clipboard.writeText(email);
+          e.preventDefault();
+          showToast(`${email} copied`);
+        } catch {
+          // clipboard blocked — let mailto: trigger normally
+        }
+      });
+    });
+  }
+
   // ---------- Shows renderer ----------
   const liveCard      = document.querySelector('.live-card');
   const upcomingBlock = document.querySelector('[data-upcoming]');
