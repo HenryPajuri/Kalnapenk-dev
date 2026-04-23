@@ -169,15 +169,18 @@
         <div class="contact-fields">
           <label class="contact-field">
             <span class="contact-field-label">Name</span>
-            <input type="text" name="name" required autocomplete="name" />
+            <input type="text" name="name" autocomplete="name" maxlength="120" />
+            <span class="contact-field-error" data-error></span>
           </label>
           <label class="contact-field">
             <span class="contact-field-label">Your email</span>
-            <input type="email" name="email" required autocomplete="email" />
+            <input type="email" name="email" autocomplete="email" maxlength="160" />
+            <span class="contact-field-error" data-error></span>
           </label>
           <label class="contact-field contact-field--msg">
             <span class="contact-field-label">Message</span>
-            <textarea name="message" rows="4" required></textarea>
+            <textarea name="message" rows="4" maxlength="2000"></textarea>
+            <span class="contact-field-error" data-error></span>
           </label>
         </div>
 
@@ -261,10 +264,61 @@
       if (e.key === 'Escape' && modal.classList.contains('is-open')) close();
     });
 
+    // Field-level validation (replaces HTML-native, which is disabled by novalidate)
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const validators = {
+      name: (v) => !v.trim() ? 'Please add your name.' : null,
+      email: (v) => {
+        const val = v.trim();
+        if (!val) return 'Please add your email.';
+        if (!emailRegex.test(val)) return 'That doesn’t look like an email.';
+        return null;
+      },
+      message: (v) => {
+        const val = v.trim();
+        if (!val) return 'A short message helps.';
+        if (val.length < 3) return 'A little more, please.';
+        return null;
+      }
+    };
+    const validateField = (field) => {
+      const input = field.querySelector('input, textarea');
+      const errEl = field.querySelector('[data-error]');
+      if (!input || !errEl || !validators[input.name]) return true;
+      const msg = validators[input.name](input.value);
+      if (msg) {
+        field.classList.add('is-invalid');
+        errEl.textContent = msg;
+        errEl.classList.add('is-visible');
+        return false;
+      }
+      field.classList.remove('is-invalid');
+      errEl.textContent = '';
+      errEl.classList.remove('is-visible');
+      return true;
+    };
+    const validateAll = () => {
+      let ok = true;
+      modal.querySelectorAll('.contact-field').forEach(f => {
+        if (!validateField(f)) ok = false;
+      });
+      return ok;
+    };
+    // Clear errors as the user edits a field we already flagged
+    form.addEventListener('input', (e) => {
+      const field = e.target.closest('.contact-field');
+      if (field && field.classList.contains('is-invalid')) validateField(field);
+    });
+
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const state = form.getAttribute('data-state');
       if (state === 'sending' || state === 'sent') return;
+      if (!validateAll()) {
+        const firstBad = modal.querySelector('.contact-field.is-invalid input, .contact-field.is-invalid textarea');
+        if (firstBad) firstBad.focus();
+        return;
+      }
       setState('sending');
       try {
         const res = await fetch(FORMSPREE_URL, {
